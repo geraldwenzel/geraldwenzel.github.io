@@ -1,0 +1,120 @@
+{{- if not (.Param "hideFooter") }}
+<footer class="footer">
+    {{- if not site.Params.footer.hideCopyright }}
+        {{- if site.Copyright }}
+        <span>{{ site.Copyright | markdownify }}</span>
+        {{- else }}
+        <span>&copy; {{ now.Year }} <a href="{{ "" | absLangURL }}">{{ site.Title }}</a></span>
+        {{- end }}
+    {{- end }}
+
+    {{- with site.Params.footer.text }}
+        {{- if not site.Params.footer.hideCopyright }}
+            {{- print " · "}}
+        {{- end }}
+        {{ . | markdownify }}
+    {{- end }}
+
+    <!-- Removed "Powered by Hugo & PaperMod" line -->
+</footer>
+{{- end }}
+
+{{- if (not site.Params.disableScrollToTop) }}
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+{{- end }}
+
+{{- partial "extend_footer.html" . }}
+
+{{- $isHLJSdisabled := (.Site.Params.assets.disableHLJS | default .Params.disableHLJS ) }}
+{{- if (and (not $isHLJSdisabled) (.Site.Params.assets.disableFingerprinting | default false)) }}
+{{- $highlightPath := "js/highlight.min.js" }}
+{{- $highVer := .Site.Data.lib.highlightjs.version }}
+{{- if (not (.Site.Params.assets.disableFingerprinting | default false)) }}
+{{- $highlightPath = printf "js/highlight.%s.min.js" $highVer }}
+{{- end }}
+<script src="{{ $highlightPath | absURL }}" defer></script>
+<script>window.addEventListener("load", () => hljs.highlightAll());</script>
+{{- end }}
+
+{{- if (not site.Params.disableThemeToggle) }}
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+{{- end }}
+
+{{- if (and (not site.Params.disableThemeToggle) site.Params.ShowShareButtons (default true .Params.ShowShareButtons)) }}
+<script>
+    document.querySelectorAll('a[href^="#/"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substring(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+{{- end }}
+
+{{- if (not site.Params.disableScrollToTop) }}
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+{{- end }}
+
+{{- if (not site.Params.disableImageZoom) }}
+<script>
+    document.querySelectorAll('img').forEach(image => {
+        image.addEventListener("click", function (e) {
+            if (this.classList.contains("gallery-image")) {
+                e.stopPropagation();
+                document.querySelector('.gallery-view').classList.add('visible');
+                document.querySelector('.gallery-view-content').replaceChildren(this.cloneNode());
+            }
+        });
+    })
+
+    document.querySelector('.gallery-view').addEventListener('click', function (e) {
+        if (e.target === this) {
+            this.classList.remove('visible');
+        }
+    });
+
+    document.querySelector('.gallery-view-close').addEventListener('click', function () {
+        document.querySelector('.gallery-view').classList.remove('visible');
+    });
+</script>
+{{- end }}

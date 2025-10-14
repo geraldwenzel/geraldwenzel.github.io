@@ -1,0 +1,72 @@
+baseURL: https://geraldwenzel.com/
+languageCode: en-us
+title: Gerald Wenzel
+theme: ["PaperMod"]
+enableGitInfo: true
+
+params:
+  defaultTheme: auto # to switch between dark or light according to browser theme
+  ShowThemeToggle: true
+  # mainSections:
+  #   - blog
+  #   - solo-audits
+
+  profileMode:
+    enabled: false
+
+    # title: "EVM ZK Proof Auditor" # optional default will be site title
+    # subtitle: "email me to request an audit"
+    # imageUrl: "https://avatars.githubusercontent.com/u/10799463?v=4" # optional
+    # imageTitle: "Gerald Wenzel avatar" # optional
+    # imageWidth: 450 # custom size
+    # imageHeight: 450 # custom size
+    # buttons:
+    #   - name: Github
+    #     url: "https://github.com/geraldwenzel"
+
+  fuseOpts:
+    isCaseSensitive: false
+    shouldSort: true
+    location: 0
+    distance: 1000
+    threshold: 0.4
+    minMatchCharLength: 0
+    # limit: 10 # refer: https://www.fusejs.io/api/methods.html#search
+    keys: ["title", "permalink", "summary", "content"]
+
+  socialIcons: # optional
+    - name: "email"
+      url: "mailto:k3otxk@geraldwenzel.com"
+    - name: "github"
+      url: "https://github.com/geraldwenzel"
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON # necessary for search
+
+menu:
+  main:
+    - identifier: blog
+      name: blog
+      url: blog
+      weight: 10
+
+    # - identifier: solo-audits
+    #   name: solo audits
+    #   url: /solo-audits/
+    #   weight: 10
+
+    # - identifier: categories
+    #   name: categories
+    #   url: /categories/
+    #   weight: 20
+    # - identifier: tags
+    #   name: tags
+    #   url: /tags/
+    #   weight: 30
+    - identifier: search
+      name: search
+      url: search
+      weight: 40
