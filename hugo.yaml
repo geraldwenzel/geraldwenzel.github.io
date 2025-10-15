@@ -70,3 +70,8 @@ menu:
       name: search
       url: search
       weight: 40
+
+    - identifier: contact
+      name: contact
+      url: contact
+      weight: 50
