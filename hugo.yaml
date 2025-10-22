@@ -75,3 +75,12 @@ menu:
       name: contact
       url: contact
       weight: 50
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+    parser:
+      attribute:
+        block: true
+        title: true
