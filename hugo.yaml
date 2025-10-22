@@ -14,16 +14,6 @@ params:
   profileMode:
     enabled: false
 
-    # title: "EVM ZK Proof Auditor" # optional default will be site title
-    # subtitle: "email me to request an audit"
-    # imageUrl: "https://avatars.githubusercontent.com/u/10799463?v=4" # optional
-    # imageTitle: "Gerald Wenzel avatar" # optional
-    # imageWidth: 450 # custom size
-    # imageHeight: 450 # custom size
-    # buttons:
-    #   - name: Github
-    #     url: "https://github.com/geraldwenzel"
-
   fuseOpts:
     isCaseSensitive: false
     shouldSort: true
@@ -70,11 +60,6 @@ menu:
       name: search
       url: search
       weight: 40
-
-    - identifier: contact
-      name: contact
-      url: contact
-      weight: 50
 
 markup:
   goldmark:
